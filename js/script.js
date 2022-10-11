@@ -28,10 +28,15 @@ if (etaUtente < 18) {
   console.log(prezzoPercorso);
 }
 
-let prezzoTotale = prezzoPercorso - (prezzoPercorso / 100 * 20) || prezzoPercorso - (prezzoPercorso / 100 * 40) || prezzoPercorso;
 
+if(etaUtente < 18) {
+  prezzoTotale = (prezzoPercorso - (prezzoPercorso / 100 * 20));
+  }
+  else if (etaUtente > 65) {
+  prezzoTotale = (prezzoPercorso - (prezzoPercorso / 100 * 40));
+  } else {
+  prezzoTotale = prezzoPercorso
+  }
 
-document.getElementById("output").innerHTML = prezzoTotale;
-
-
-num.toFixed(2);
+  
+  document.getElementById("output").innerHTML = prezzoTotale;
