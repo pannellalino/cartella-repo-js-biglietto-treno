@@ -8,35 +8,33 @@
   //sconto minorenni del 20%
   //sconto over 65 del 40%
 
-const km_daPercorrere = parseInt(prompt('Quanti Km vuoi percorrere?'));
-const etaUtente = parseInt(prompt('Quanti anni hai?'));
-const prezzoKm = 0.21;
-
-
-const prezzoPercorso = km_daPercorrere * prezzoKm;
-console.log(prezzoPercorso);
-
-
-if (etaUtente < 18) {
-  console.log('etaUtente è minorenne' + prezzoPercorso - (prezzoPercorso / 100 * 20));
-  console.log(prezzoPercorso - (prezzoPercorso / 100 * 20));
-} else if (etaUtente > 65) {
-  console.log('etaUtente è over' + prezzoPercorso - (prezzoPercorso / 100 * 40));
-  console.log(prezzoPercorso - (prezzoPercorso / 100 * 40));
-} else {
-  console.log('no discount' + prezzoPercorso);
-  console.log(prezzoPercorso);
-}
-
-
-if(etaUtente < 18) {
-  prezzoTotale = (prezzoPercorso - (prezzoPercorso / 100 * 20));
-  }
-  else if (etaUtente > 65) {
-  prezzoTotale = (prezzoPercorso - (prezzoPercorso / 100 * 40));
-  } else {
-  prezzoTotale = prezzoPercorso
-  }
-
   
-  document.getElementById("output").innerHTML = prezzoTotale;
+  const age = parseInt(prompt('Quanti anni hai?'));
+  const km = parseInt(prompt('Quanti Km vuoi percorrere?'));
+  const priceForKm = 0.21;
+  const discountJunior = 0.2;
+  const discountSenior = 0.4;
+  
+  let msg, totalPrice, discountPrice;
+  
+  totalPrice = km * priceForKm;
+  
+  msg = `Il prezzo del biglietto è di € ${totalPrice.toFixed(2)}.`;
+  
+  // anche se è una stringa lo vede come numero
+  if(age < 18){
+    //discountPrice = totalPrice - totalPrice * discountJunior;
+    discountPrice = totalPrice * (1 - discountJunior);
+    msg += `
+      <br>
+      Essendo minorenne hai lo sconto del ${discountJunior * 100}% quindi paghi solo € ${discountPrice.toFixed(2)}!
+    `;
+  }else if(age >= 65){
+    discountPrice = totalPrice * (1 - discountSenior);
+    msg += `
+      <br>
+      Essendo over 65 hai lo sconto del ${discountSenior * 100}% quindi paghi solo € ${discountPrice.toFixed(2)}!
+    `;
+  }
+  
+  document.getElementById('output').innerHTML = msg;
